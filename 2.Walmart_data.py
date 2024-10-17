@@ -13,7 +13,7 @@ def scrapeops_url(url):
 	return proxy_url
 
 # Load JSON data from a file
-with open('./algoproject/url/walmart_url.json', 'r') as file:
+with open('./url/walmart_url.json', 'r') as file:
 	product_url_list = json.load(file)
 
 product_data_list = []
@@ -60,12 +60,12 @@ with open('walmart_product_list.json', 'w') as file:
 print(f"Scraped data saved to 'walmart_product_list.json'.")
 
 
-directory_name = "./algoproject/result"
+directory_name = "./result"
 try:
 	os.mkdir(directory_name)
 	print(f"Directory '{directory_name}' created successfully.")
 except FileExistsError:
 	print(f"Directory '{directory_name}' already exists.")
 
-os.replace('walmart_product_list.json', './algoproject/result/walmart_product_list.json')
+os.replace('walmart_product_list.json', './result/walmart_product_list.json')
 print("moved to result/")

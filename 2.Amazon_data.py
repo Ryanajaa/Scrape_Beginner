@@ -49,7 +49,7 @@ headers = {
 	"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
 }
 
-with open('./algoproject/url/amazon_url.json', 'r') as file:
+with open('./url/amazon_url.json', 'r') as file:
 	product_url_list = json.load(file)
 
 product_data_list = []
@@ -110,12 +110,12 @@ with open('amazon_product_list.json', 'w') as file:
 print(f"Scraped data saved to 'amazon_product_list.json'.")
 
 
-directory_name = "./algoproject/result"
+directory_name = "./result"
 try:
 	os.mkdir(directory_name)
 	print(f"Directory '{directory_name}' created successfully.")
 except FileExistsError:
 	print(f"Directory '{directory_name}' already exists.")
 
-os.replace('amazon_product_list.json', './algoproject/result/amazon_product_list.json')
+os.replace('amazon_product_list.json', './result/amazon_product_list.json')
 print("moved to result/")

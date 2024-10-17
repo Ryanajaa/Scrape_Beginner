@@ -43,31 +43,29 @@ async def run_group_input(scripts):
     await asyncio.gather(*tasks)  # Run all scripts concurrently
 
 async def main():
-    '''
+
     # First group of scripts
     group1 = [
-        os.path.join("algoproject", "1.Amazon_url.py"),
-        os.path.join("algoproject", "1.Ebay_url.py"),
-        os.path.join("algoproject", "1.Walmart_url.py")
+        "1.Amazon_url.py",
+        "1.Ebay_url.py",
+        "1.Walmart_url.py"
     ]
     await run_group_input(group1)  # Run the first group and wait for them to finish
-    
     print("done scrape urls")
 
     # Second group of scripts
     group2 = [
-        os.path.join("algoproject", "2.Amazon_data.py"),
-        os.path.join("algoproject", "2.Ebay_data.py"),
-        os.path.join("algoproject", "2.Walmart_data.py")
+        "2.Amazon_data.py",
+        "2.Ebay_data.py",
+        "2.Walmart_data.py"
     ]
     await run_group(group2)  # Run the second group and wait for them to finish
-    
     print("done list product")
-    '''
+    
     # Run the final scripts
-    os.system("python " + os.path.join("algoproject", "3.algo_sort.py"))
-    os.system("python " + os.path.join("algoproject", "3.compro_sort.py"))
-    os.system("python " + os.path.join("algoproject", "4.edit_data.py"))
+    os.system("python " + "3.algo_sort.py")
+    os.system("python " + "3.compro_sort.py")
+    os.system("python " + "4.edit_data.py")
 
 # Run the main function
 if __name__ == "__main__":

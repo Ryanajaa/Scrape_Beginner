@@ -86,7 +86,7 @@ with open('amazon_url.json', 'w') as file:
 	json.dump(product_url_list, file, indent=4)
 print(f"Scraped data saved to 'amazon_url.json'.")
 
-directory_name = "./algoproject/url"
+directory_name = "./url"
 try:
 	os.mkdir(directory_name)
 	# print(f"Directory '{directory_name}' created successfully.")
@@ -94,5 +94,5 @@ except FileExistsError:
 	# print(f"Directory '{directory_name}' already exists.")
 	print('.')
 
-os.replace('amazon_url.json', './algoproject/url/amazon_url.json')
+os.replace('amazon_url.json', './url/amazon_url.json')
 # print("moved to url/")

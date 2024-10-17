@@ -1,7 +1,7 @@
 import json, os
 
 # Load the JSON data (replace with actual file loading if needed)
-with open('./algoproject/compro_data/ebay_sort.json', 'r') as file:
+with open('./compro_data/ebay_sort.json', 'r') as file:
 	ebay = json.load(file)
 
 # Remove specified keys and reorder
@@ -30,11 +30,11 @@ for item in ebay:
 with open("ebay_mod.json", "w") as file:
 	json.dump(ebay, file, indent=4)
 
-os.replace("ebay_mod" + '.json', "./algoproject/compro_data" + '/' + "ebay" + '.json')
+os.replace("ebay_mod" + '.json', "./compro_data" + '/' + "ebay" + '.json')
 # Output the result for visual confirmation
 
 # Load the JSON data (replace with actual file loading if needed)
-with open('./algoproject/compro_data/walmart_sort.json', 'r') as file:
+with open('./compro_data/walmart_sort.json', 'r') as file:
 	walmart = json.load(file)
 
 # Remove specified keys and reorder
@@ -67,11 +67,11 @@ for item in walmart:
 with open("walmart_mod.json", "w") as file:
 	json.dump(walmart, file, indent=4)
 
-os.replace("walmart_mod" + '.json', "./algoproject/compro_data" + '/' + "walmart" + '.json')
+os.replace("walmart_mod" + '.json', "./compro_data" + '/' + "walmart" + '.json')
 # Output the result for visual confirmation
 
 # Load the JSON data (replace with actual file loading if needed)
-with open('./algoproject/compro_data/amazon_sort.json', 'r') as file:
+with open('./compro_data/amazon_sort.json', 'r') as file:
 	amazon = json.load(file)
 
 # Remove specified keys and reorder
@@ -93,14 +93,8 @@ for item in amazon:
 with open("amazon_mod.json", "w") as file:
 	json.dump(ebay, file, indent=4)
 
-os.replace("amazon_mod" + '.json', "./algoproject/compro_data" + '/' + "amazon" + '.json')
-# amazon_sort_path = "./algoproject/compro_data/amazon_sort.json"
-# amazon_mod_path = "./algoproject/compro_data/amazon.json"
+os.replace("amazon_mod" + '.json', "./compro_data" + '/' + "amazon" + '.json')
 
-# if os.path.exists(amazon_mod_path):
-#     os.remove(amazon_mod_path)  # Remove the existing file if it exists
-
-# os.rename(amazon_sort_path, amazon_mod_path)
-os.remove("./algoproject/compro_data/amazon_sort.json")
-os.remove("./algoproject/compro_data/ebay_sort.json")
-os.remove("./algoproject/compro_data/walmart_sort.json")
+os.remove("./compro_data/amazon_sort.json")
+os.remove("./compro_data/ebay_sort.json")
+os.remove("./compro_data/walmart_sort.json")

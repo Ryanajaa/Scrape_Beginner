@@ -4,7 +4,7 @@ import os
 from parsel import Selector
 
 # Read URLs from JSON file
-with open('./algoproject/url/ebay_url.json', 'r') as file:
+with open('./url/ebay_url.json', 'r') as file:
 	urls = json.load(file)
 
 # Establish our HTTP2 client with browser-like headers
@@ -64,12 +64,12 @@ with open('ebay_product_list.json', 'w') as file:
 	json.dump(all_product_data, file, indent=4)
 print(f"Data has been written to ebay_product_list.json")
 
-directory_name = "./algoproject/result"
+directory_name = "./result"
 try:
 	os.mkdir(directory_name)
 	print(f"Directory '{directory_name}' created successfully.")
 except FileExistsError:
 	print(f"Directory '{directory_name}' already exists.")
 
-os.replace('ebay_product_list.json', './algoproject/result/ebay_product_list.json')
+os.replace('ebay_product_list.json', './result/ebay_product_list.json')
 print("moved to result/")

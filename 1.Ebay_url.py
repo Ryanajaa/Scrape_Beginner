@@ -53,7 +53,7 @@ with open("ebay_url.json", 'w') as file:
 	json.dump(product_url_list, file, indent=4)
 print(f"Scraped data saved to 'ebay_url.json'.")
 
-directory_name = "./algoproject/url"
+directory_name = "./url"
 try:
 	os.mkdir(directory_name)
 	# print(f"Directory '{directory_name}' created successfully.")
@@ -61,5 +61,5 @@ except FileExistsError:
 	# print(f"Directory '{directory_name}' already exists.")
 	print('.')
 	
-os.replace('ebay_url.json', './algoproject/url/ebay_url.json')
+os.replace('ebay_url.json', './url/ebay_url.json')
 # print("moved to url/")
