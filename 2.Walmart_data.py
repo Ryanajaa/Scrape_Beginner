@@ -13,11 +13,8 @@ def scrapeops_url(url):
 	return proxy_url
 
 # Load JSON data from a file
-with open('url/walmart_url.json', 'r') as file:
+with open('./algoproject/url/walmart_url.json', 'r') as file:
 	product_url_list = json.load(file)
-
-for url in product_url_list:
-	print(url)
 
 product_data_list = []
 
@@ -41,14 +38,14 @@ for url in product_url_list:
 					'rating':  raw_product_data.get('averageRating'),
 					'manufacturerName':  raw_product_data.get('manufacturerName'),
 					'shortDescription':  raw_product_data.get('shortDescription'),
-					'imagea':  raw_product_data['imageInfo'].get('thumbnailUrl'),
+					'image':  raw_product_data['imageInfo'].get('thumbnailUrl'),
 					'price':  raw_product_data['priceInfo']['currentPrice'].get('price'), 
 					'currencyUnit':  raw_product_data['priceInfo']['currentPrice'].get('currencyUnit'),  
+					'URL': url
 				})
 				print("loaded..")
 			else:
 				print("scrip tag not found")
-		
 		# Break the loop when we have 10 elements
 		if len(product_data_list) >= 10:
 			break
@@ -63,12 +60,12 @@ with open('walmart_product_list.json', 'w') as file:
 print(f"Scraped data saved to 'walmart_product_list.json'.")
 
 
-directory_name = "result"
+directory_name = "./algoproject/result"
 try:
 	os.mkdir(directory_name)
 	print(f"Directory '{directory_name}' created successfully.")
 except FileExistsError:
 	print(f"Directory '{directory_name}' already exists.")
 
-os.replace('walmart_product_list.json', 'result/walmart_product_list.json')
+os.replace('walmart_product_list.json', './algoproject/result/walmart_product_list.json')
 print("moved to result/")

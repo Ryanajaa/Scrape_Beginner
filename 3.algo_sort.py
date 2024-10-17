@@ -3,7 +3,7 @@ import os
 import re
 
 # Load JSON data from files
-with open('result/amazon_product_list.json', 'r') as f1, open('result/ebay_product_list.json', 'r') as f2, open('result/walmart_product_list.json', 'r') as f3:
+with open('./algoproject/result/amazon_product_list.json', 'r') as f1, open('./algoproject/result/ebay_product_list.json', 'r') as f2, open('./algoproject/result/walmart_product_list.json', 'r') as f3:
 	data1 = json.load(f1)
 	data2 = json.load(f2)
 	data3 = json.load(f3)
@@ -81,7 +81,7 @@ with open(sort_name_price + '.json', 'w') as file:
 print(f"Scraped data saved to '" + sort_name_price + ".json'.\n")
 
 # Create directory if it doesn't exist and move files
-directory_name = "sorted"
+directory_name = "./algoproject/sorted"
 try:
 	os.mkdir(directory_name)
 	print(f"Directory '{directory_name}' created successfully.")

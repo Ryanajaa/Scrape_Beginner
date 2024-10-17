@@ -3,6 +3,11 @@ import requests
 import os
 from bs4 import BeautifulSoup
 from urllib.parse import urlencode
+import sys
+
+## Walmart Search Keyword
+keyword = sys.argv[1]
+print(f"start walmart: {keyword}")
 
 def create_walmart_product_url(product):
 	return 'https://www.walmart.com' + product.get('canonicalUrl', '').split('?')[0]
@@ -10,15 +15,12 @@ def create_walmart_product_url(product):
 headers={"User-Agent": "Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"}
 product_url_list = []
 
-## Walmart Search Keyword
-keyword = 'Bosch'
-
 ## Loop Through Walmart Pages Until No More Products
 for page in range(1, 2):
 	try:
 		payload = {'q': keyword, 'sort': 'best_seller', 'page': page, 'affinityOverride': 'default'}
 		walmart_search_url = 'https://www.walmart.com/search?' + urlencode(payload)
-		print("searching from URL : " + walmart_search_url)
+		# print("searching from URL : " + walmart_search_url)
 		response = requests.get(walmart_search_url, headers=headers)
 
 		if response.status_code == 200:
@@ -36,18 +38,19 @@ for page in range(1, 2):
 	except Exception as e:
 		print('Error', e)
 			
-print(product_url_list)
+# print(product_url_list)
 
 with open('walmart_url.json', 'w') as file:
 	json.dump(product_url_list, file, indent=4)
 print(f"Scraped data saved to 'walmart_url.json'.")
 
-directory_name = "url"
+directory_name = "./algoproject/url"
 try:
 	os.mkdir(directory_name)
 	print(f"Directory '{directory_name}' created successfully.")
 except FileExistsError:
-	print(f"Directory '{directory_name}' already exists.")
+	# print(f"Directory '{directory_name}' already exists.")
+	print('.')
 
-os.replace('walmart_url.json', 'url/walmart_url.json')
-print("moved to url/")
+os.replace('walmart_url.json', './algoproject/url/walmart_url.json')
+# print("moved to url/")

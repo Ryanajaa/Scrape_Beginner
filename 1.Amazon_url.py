@@ -4,6 +4,12 @@ import json
 import random
 import os
 from urllib.parse import urlencode
+import sys
+
+
+keyword = sys.argv[1]
+print(f"start amazon: {keyword}")
+
 
 def create_amazon_product_url(id):
 	return 'https://www.amazon.com/dp/' + str(id)
@@ -14,7 +20,7 @@ product_url_list = []
 
 # User-agent list
 useragents = [
-	'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36'
+	'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
 	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36',
 	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
 	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
@@ -56,8 +62,6 @@ headers = {
 	"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
 }
 
-keyword = 'bosch'
-
 for page in range(1, 3):
 	try:
 		payload = {'k': keyword, 'page': page}
@@ -77,17 +81,18 @@ for page in range(1, 3):
 	except Exception as e:
 		print('Error', e)
 
-print(product_url_list) 
+# print(product_url_list) 
 with open('amazon_url.json', 'w') as file:
-    json.dump(product_url_list, file, indent=4)
+	json.dump(product_url_list, file, indent=4)
 print(f"Scraped data saved to 'amazon_url.json'.")
 
-directory_name = "url"
+directory_name = "./algoproject/url"
 try:
 	os.mkdir(directory_name)
-	print(f"Directory '{directory_name}' created successfully.")
+	# print(f"Directory '{directory_name}' created successfully.")
 except FileExistsError:
-	print(f"Directory '{directory_name}' already exists.")
+	# print(f"Directory '{directory_name}' already exists.")
+	print('.')
 
-os.replace('amazon_url.json', 'url/amazon_url.json')
-print("moved to url/")
+os.replace('amazon_url.json', './algoproject/url/amazon_url.json')
+# print("moved to url/")

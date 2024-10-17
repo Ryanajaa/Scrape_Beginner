@@ -3,9 +3,11 @@ from bs4 import BeautifulSoup
 import json
 import os
 from urllib.parse import urlencode
+import sys
 
 # Initial setup
-user_search_query = "bosch"
+keyword = sys.argv[1]
+print(f"start ebay: {keyword}")
 
 sort = "best_match"
 items_per_page = 10
@@ -18,7 +20,7 @@ SORTING_MAP = {
 # Create eBay request URL
 base_url = "https://www.ebay.com/sch/i.html?"
 query_params = {
-	"_nkw": user_search_query,
+	"_nkw": keyword,
 	"_ipg": items_per_page,
 	"_sop": SORTING_MAP[sort],
 }
@@ -39,24 +41,25 @@ for i in range(1, 2):
 			url_on_page.append(product_url)
 
 	product_url_list.extend(url_on_page)
-	print(url_on_page)
+	# print(url_on_page)
 
 	next_page_button = soup.select_one("a.pagination__next")
 	next_page_url = next_page_button["href"] if next_page_button else None
 	current_url = next_page_url
-	print(next_page_url)
+	# print(next_page_url)
 
 # Write results to JSON
 with open("ebay_url.json", 'w') as file:
 	json.dump(product_url_list, file, indent=4)
-print(f"Data has been written to {"ebay_url.json"}")
+print(f"Scraped data saved to 'ebay_url.json'.")
 
-directory_name = "url"
+directory_name = "./algoproject/url"
 try:
 	os.mkdir(directory_name)
-	print(f"Directory '{directory_name}' created successfully.")
+	# print(f"Directory '{directory_name}' created successfully.")
 except FileExistsError:
-	print(f"Directory '{directory_name}' already exists.")
+	# print(f"Directory '{directory_name}' already exists.")
+	print('.')
 	
-os.replace('ebay_url.json', 'url/ebay_url.json')
-print("moved to url/")
+os.replace('ebay_url.json', './algoproject/url/ebay_url.json')
+# print("moved to url/")

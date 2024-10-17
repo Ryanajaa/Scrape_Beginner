@@ -7,7 +7,7 @@ import random
 
 # User-agent list
 useragents = [
-	'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36'
+	'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
 	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36',
 	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
 	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
@@ -49,7 +49,7 @@ headers = {
 	"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
 }
 
-with open('url/amazon_url.json', 'r') as file:
+with open('./algoproject/url/amazon_url.json', 'r') as file:
 	product_url_list = json.load(file)
 
 product_data_list = []
@@ -93,11 +93,11 @@ for url in product_url_list:
 			product_info["images"] = images if images else []
 
 			product_info["URL"] = url #for debugging
-			
-			print("Product loaded..")
-			product_data_list.append(product_info)
 		else:
 			print(f"Error: Status code {response.status_code}")
+		if product_info["price"] and product_info["price"] != " ":
+			print("Product loaded..")
+			product_data_list.append(product_info)
 
 		if len(product_data_list) >= 10:
 			break
@@ -110,12 +110,12 @@ with open('amazon_product_list.json', 'w') as file:
 print(f"Scraped data saved to 'amazon_product_list.json'.")
 
 
-directory_name = "result"
+directory_name = "./algoproject/result"
 try:
 	os.mkdir(directory_name)
 	print(f"Directory '{directory_name}' created successfully.")
 except FileExistsError:
 	print(f"Directory '{directory_name}' already exists.")
 
-os.replace('amazon_product_list.json', 'result/amazon_product_list.json')
+os.replace('amazon_product_list.json', './algoproject/result/amazon_product_list.json')
 print("moved to result/")
