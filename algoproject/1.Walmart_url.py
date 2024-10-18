@@ -16,7 +16,7 @@ headers={"User-Agent": "Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKi
 product_url_list = []
 
 ## Loop Through Walmart Pages Until No More Products
-for page in range(1, 2):
+for page in range(1, 3):
 	try:
 		payload = {'q': keyword, 'sort': 'best_seller', 'page': page, 'affinityOverride': 'default'}
 		walmart_search_url = 'https://www.walmart.com/search?' + urlencode(payload)
@@ -32,6 +32,7 @@ for page in range(1, 2):
 				product_list = json_blob["props"]["pageProps"]["initialData"]["searchResult"]["itemStacks"][0]["items"]
 				product_urls = [create_walmart_product_url(product) for product in product_list]
 				product_url_list.extend(product_urls)
+				product_url_list = list(set(product_url_list))
 				if len(product_urls) == 0:
 					break
 					
@@ -44,7 +45,7 @@ with open('walmart_url.json', 'w') as file:
 	json.dump(product_url_list, file, indent=4)
 print(f"Scraped data saved to 'walmart_url.json'.")
 
-directory_name = "./url"
+directory_name = "./algoproject/url"
 try:
 	os.mkdir(directory_name)
 	print(f"Directory '{directory_name}' created successfully.")
@@ -52,5 +53,5 @@ except FileExistsError:
 	# print(f"Directory '{directory_name}' already exists.")
 	print('.')
 
-os.replace('walmart_url.json', './url/walmart_url.json')
+os.replace('walmart_url.json', './algoproject/url/walmart_url.json')
 # print("moved to url/")

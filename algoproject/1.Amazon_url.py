@@ -73,8 +73,11 @@ for page in range(1, 3):
 			soup = BeautifulSoup(html_response, "html.parser")
 
 			product_id_list = [div['data-asin'] for div in soup.find_all('div', {'data-asin': True}) if div['data-asin']]
-			product_urls = [create_amazon_product_url(product_id) for product_id in product_id_list]
+			product_urls = [create_amazon_product_url(product_id) 
+                for product_id in product_id_list 
+                if create_amazon_product_url(product_id) not in product_url_list]
 			product_url_list.extend(product_urls)
+			product_url_list = list(set(product_url_list))
 			if len(product_urls) == 0:
 				break
 
@@ -86,7 +89,7 @@ with open('amazon_url.json', 'w') as file:
 	json.dump(product_url_list, file, indent=4)
 print(f"Scraped data saved to 'amazon_url.json'.")
 
-directory_name = "./url"
+directory_name = "./algoproject/url"
 try:
 	os.mkdir(directory_name)
 	# print(f"Directory '{directory_name}' created successfully.")
@@ -94,5 +97,5 @@ except FileExistsError:
 	# print(f"Directory '{directory_name}' already exists.")
 	print('.')
 
-os.replace('amazon_url.json', './url/amazon_url.json')
+os.replace('amazon_url.json', './algoproject/url/amazon_url.json')
 # print("moved to url/")
